@@ -6,22 +6,31 @@ import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
 
 function HomePage() {
   const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    const endpoint = `${API_URL}popular?api_key=${API_KEY}&language=en-US&page=1`;
+    getMovies(endpoint);
+  }, []);
+
+  const getMovies = (path) => {
     axios
-      .get(`${API_URL}popular?api_key=${API_KEY}&language=en-US&page=1`)
-      // .then((res) => res.json())
+      .get(path)
       .then((res) => {
         console.log(res.data);
-        setMovies(res.data.results);
+        setMovies([...movies, ...res.data.results]);
+        setCurrentPage(res.data.page);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
 
-  const onClick = () => {
-    //
+  const handleClick = () => {
+    const endpoint = `${API_URL}popular?api_key=${API_KEY}&language=en-US&page=${
+      currentPage + 1
+    }`;
+    getMovies(endpoint);
   };
 
   return (
@@ -50,7 +59,7 @@ function HomePage() {
       </div>
 
       <div className="loadmore">
-        <button onClick>Load More</button>
+        <button onClick={handleClick}>Load More</button>
       </div>
     </div>
   );

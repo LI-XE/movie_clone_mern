@@ -41,7 +41,7 @@ body {
 
 .home h2 {
   margin: 0 0.5em;
-  border-bottom: 0.3rem solid gray;
+  border-bottom: 0.3rem solid rgb(187, 186, 186);
 }
 
 .main {
