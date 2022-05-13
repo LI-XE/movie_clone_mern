@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import MainImage from "../components/MainImage";
-import MovieCard from "../components/MovieCard";
+import Card from "../components/Card";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
 
 function HomePage() {
@@ -47,7 +47,7 @@ function HomePage() {
       <h2>Latest Movies</h2>
       <div className="main">
         {movies?.map((movie, key) => (
-          <MovieCard
+          <Card
             image={
               movie.poster_path &&
               `${IMAGE_BASE_URL}w500${movie.poster_path && movie.poster_path}`
