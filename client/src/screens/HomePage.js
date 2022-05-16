@@ -9,7 +9,7 @@ function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const endpoint = `${API_URL}popular?api_key=${API_KEY}&language=en-US&page=1`;
+    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
     getMovies(endpoint);
   }, []);
 
@@ -27,7 +27,7 @@ function HomePage() {
   };
 
   const handleClick = () => {
-    const endpoint = `${API_URL}popular?api_key=${API_KEY}&language=en-US&page=${
+    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
       currentPage + 1
     }`;
     getMovies(endpoint);

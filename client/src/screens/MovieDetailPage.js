@@ -4,6 +4,7 @@ import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
 import { useParams } from "react-router-dom";
 import MainImage from "../components/MainImage";
 import Card from "../components/Card";
+import FavoriteBtn from "../components/FavoriteBtn";
 
 function MovieDetailPage(props) {
   const [movie, setMovie] = useState();
@@ -13,17 +14,18 @@ function MovieDetailPage(props) {
   console.log(movieId);
 
   useEffect(() => {
-    // const movieId = props.match.params.movieId;
+    axios.get(`${API_URL}`);
+
     axios
-      .get(`${API_URL}${movieId}?api_key=${API_KEY}&language=en-US`)
+      .get(`${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`)
       .then((res) => {
         console.log(res.data);
         setMovie(res.data);
 
         axios
-          .get(`${API_URL}${movieId}/credits?api_key=${API_KEY}`)
+          .get(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
           .then((res) => {
-            setCrews(res.data.crew);
+            setCrews(res.data.cast);
             console.log(res.data.cast);
           });
       });
@@ -46,7 +48,11 @@ function MovieDetailPage(props) {
           />
           <div className="movie_info">
             <div className="favorite">
-              <button type="submit">Add to Favorite</button>
+              <FavoriteBtn
+                userFrom={JSON.parse(localStorage.getItem("user"))._id}
+                movieId={movieId}
+                movieInfo={movie}
+              />
             </div>
             <h2>Movie Info</h2>
             <table className="table">

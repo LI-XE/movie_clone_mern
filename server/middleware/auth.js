@@ -3,13 +3,14 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   authenticate(req, res, next) {
     const token = req.cookies.usertoken;
-    jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
+    console.log(`token: ${token}`);
+    jwt.verify(token, "secret", (err, payload) => {
       if (err) {
         console.log(err);
         res.status(401).json({ isAuth: false, error: true });
       } else {
         req.token = token;
-        req.user = user;
+        req.user = payload;
         console.log("You are authenticated");
         next();
       }

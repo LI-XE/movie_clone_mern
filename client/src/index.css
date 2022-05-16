@@ -168,3 +168,43 @@ th {
   background-color: skyblue;
   color: white;
 }
+
+.signin_container {
+  max-width: 30rem;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0.1rem solid lightgray;
+  padding: 1em;
+}
+
+.signin_container .form {
+  max-width: 60rem;
+  margin: 0;
+}
+
+.signin_container h1 {
+  font-weight: 500;
+  font-size: 3rem;
+  margin-bottom: 0.5em;
+}
+
+.signin_container div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.signin_container  label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.signin_container  p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-top: 1em;
+}
