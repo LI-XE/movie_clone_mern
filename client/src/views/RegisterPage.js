@@ -36,7 +36,7 @@ function RegisterPage(props) {
 
   return (
     <div className="signin_container">
-      <form className="form" onSubmit={submitHandler}>
+      <form className="reglog_form" onSubmit={submitHandler}>
         <div>
           <h1>Create Account</h1>
         </div>
@@ -94,7 +94,7 @@ function RegisterPage(props) {
           <div>
             <p>
               Already have an account?{" "}
-              <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+              <Link to={`/login?redirect=${redirect}`}>Sign-In</Link>
             </p>
           </div>
         </div>

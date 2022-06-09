@@ -30,7 +30,7 @@ function LoginPage(props) {
 
   return (
     <div className="signin_container">
-      <form className="form" onSubmit={submitHandler}>
+      <form className="reglog_form" onSubmit={submitHandler}>
         <div>
           <h1>Sign-In</h1>
         </div>
@@ -66,9 +66,9 @@ function LoginPage(props) {
           <label />
           <div>
             <p>
-              New to Amazon?{" "}
+              Don't have an account?{" "}
               <Link to={`/register?redirect=${redirect}`}>
-                Create your account
+                Create new account
               </Link>
             </p>
           </div>
