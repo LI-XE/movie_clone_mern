@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
 import HomePage from "./screens/HomePage";
 import MovieDetailPage from "./screens/MovieDetailPage";
 import LoginPage from "./views/LoginPage";
@@ -9,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Header />
         <div className="container">
           <Routes>
             <Route path="/" element={<HomePage />} exact></Route>
