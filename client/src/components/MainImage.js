@@ -10,7 +10,7 @@ function MainImage(props) {
   41%,rgba(0,0,0,0.65)
   100%),
   url('${props.image}'), #1c1c1c`,
-        height: "600px",
+        height: "650px",
         backgroundSize: "100%, cover",
         backgroundPosition: "center, center",
         backgroundRepeat: "no-repeat",

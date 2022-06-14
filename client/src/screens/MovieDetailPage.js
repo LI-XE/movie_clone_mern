@@ -14,8 +14,6 @@ function MovieDetailPage(props) {
   console.log(movieId);
 
   useEffect(() => {
-    axios.get(`${API_URL}`);
-
     axios
       .get(`${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`)
       .then((res) => {

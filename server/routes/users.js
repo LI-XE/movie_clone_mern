@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const { User } = require("../models/User");
+const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 const { authenticate, generateToken } = require("../middleware/auth");
@@ -9,13 +9,12 @@ const { authenticate, generateToken } = require("../middleware/auth");
 router.get("/auth", authenticate, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
-    // isAdmin: req.user.role === 0 ? false : true,
-    // isAuth: true,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
     email: req.user.email,
     name: req.user.name,
-    // lastname: req.user.lastname,
-    // role: req.user.role,
-    // image: req.user.image,
+    role: req.user.role,
+    image: req.user.image,
   });
 });
 
@@ -58,27 +57,24 @@ router.post("/login", (req, res) => {
           .then((isPasswordValid) => {
             if (isPasswordValid === true) {
               console.log("password is valid");
-              res.cookie("usertokenExp", user.tokenExp);
+              const token = jwt.sign(user._id.toHexString(), "secret");
+              // res.cookie("usertokenExp", user.tokenExp);
               res
-                .cookie(
-                  "usertoken",
-                  jwt.sign(
-                    {
-                      _id: user._id,
-                      name: user.name,
-                      email: user.email,
-                    },
-                    "secret"
-                  )
-                )
+                .cookie("usertoken", jwt.sign(user._id.toHexString(), "secret"), {
+                  httpOnly: true,
+                  expires: new Date(Date.now() + 900000000),
+                })
+                .status(200)
                 .json({
                   message: "Successfully logged in",
                   name: user.name,
                   email: user.email,
                   _id: user._id,
-                  token: res.cookie.usertoken,
+                  token: token,
                   loginSuccess: true,
+                  isAuth: true,
                 });
+              console.log(`User!!!!: ${user}`);
             } else {
               res
                 .status(400)

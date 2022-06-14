@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { Favorite } = require("../models/Favorite");
 
-const { authenticate } = require("../middleware/auth");
+const { authenticate } = require("../middleware/auth.js");
 
 //=================================
 //             Subscribe
@@ -27,7 +27,6 @@ router.post("/favorited", authenticate, (req, res) => {
     let result = false;
     if (favorite.length !== 0) {
       result = true;
-      console.log(userFrom);
     }
 
     res.status(200).json({ success: true, favorited: result });
@@ -35,7 +34,7 @@ router.post("/favorited", authenticate, (req, res) => {
 });
 
 router.post("/addToFavorite", authenticate, (req, res) => {
-  console.log(req.body);
+  // console.log(`req.body!!!: ${req.body}`);
 
   const favorite = new Favorite(req.body);
 
@@ -55,7 +54,7 @@ router.post("/removeFromFavorite", authenticate, (req, res) => {
   });
 });
 
-router.post("/getFavoredMovie", (req, res) => {
+router.post("/getFavoredMovie", authenticate, (req, res) => {
   //Need to find all of the Users that I am subscribing to From Subscriber Collection
   Favorite.find({ userFrom: req.body.userFrom }).exec((err, favorites) => {
     if (err) return res.status(400).send(err);

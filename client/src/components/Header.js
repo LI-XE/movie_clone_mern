@@ -1,7 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { signout } from "../actions/userActions";
 
 function Header() {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  const dispatch = useDispatch();
+  const signoutHandler = () => {
+    dispatch(signout());
+  };
+
   return (
     <div className="header">
       <Link to="/">
@@ -25,9 +35,19 @@ function Header() {
           </div>
         </div>
       </Link>
-
-      
-        <Link to="/login">
+      {userInfo ? (
+        <Link to="/login" onClick={signoutHandler}>
+          <div className="row  row-1">
+            <div className="icon">
+              <i className="fa fa-user"></i>
+            </div>
+            <div>
+              <span>Logout</span>
+            </div>
+          </div>
+        </Link>
+      ) : (
+        <Link to={!userInfo && "/login"}>
           <div className="row  row-1">
             <div className="icon">
               <i className="fa fa-user"></i>
@@ -37,6 +57,7 @@ function Header() {
             </div>
           </div>
         </Link>
+      )}
     </div>
   );
 }

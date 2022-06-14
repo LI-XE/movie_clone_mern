@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
+  userAuthReducer,
   userDitailsReducer,
   userRegisterReducer,
   userSigninReducer,
@@ -13,13 +14,16 @@ const initialState = {
   },
 };
 
+// console.log(initialState.userSignin.userInfo);
+
 const store = configureStore({
   reducer: {
     userRegister: userRegisterReducer,
     userSignin: userSigninReducer,
     userDetails: userDitailsReducer,
-    initialState,
+    userAuth: userAuthReducer,
   },
+  preloadedState: initialState,
 });
 
 export default store;

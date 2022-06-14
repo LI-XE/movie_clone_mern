@@ -1,4 +1,5 @@
 import {
+  USER_AUTH_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -64,26 +65,3 @@ export const userDitailsReducer = (state = { loading: true }, action) => {
       return state;
   }
 };
-
-// import {
-//   LOGIN_USER,
-//   REGISTER_USER,
-//   AUTH_USER,
-//   LOGOUT_USER,
-// } from "../types/userTypes";
-
-// // eslint-disable-next-line import/no-anonymous-default-export
-// export default function (state = {}, action) {
-//   switch (action.type) {
-//     case REGISTER_USER:
-//       return { ...state, register: action.payload };
-//     case LOGIN_USER:
-//       return { ...state, loginSucces: action.payload };
-//     case AUTH_USER:
-//       return { ...state, userData: action.payload };
-//     case LOGOUT_USER:
-//       return { ...state };
-//     default:
-//       return state;
-//   }
-// }
