@@ -16,18 +16,21 @@ function FavoriteBtn(props) {
     movieRunTime: props.movieInfo.runtime,
   };
 
-  console.log(variables);
-  console.log(localStorage.getItem("user"));
-  console.log(favorited);
-
-  console.log(userInfo);
+  // console.log(variables);
+  // console.log(localStorage.getItem("user"));
+  // console.log(favorited);
+  // console.log(favoriteNumber);
+  // console.log(userInfo);
 
   useEffect(() => {
     axios
-      .post(`http://localhost:5000/api/favorite/favoriteNumber`, variables)
+      .post(`http://localhost:5000/api/favorite/favoriteNumber`, variables, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data);
+          // console.log(res.data);
           setFavoriteNumber(res.data.favoriteNumber);
         } else {
           alert("Failed to get favoriteNumber.");
@@ -44,7 +47,7 @@ function FavoriteBtn(props) {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data);
+          // console.log(res.data);
           setFavorited(res.data.favorited);
         } else {
           alert("Failed to get Favorite Info");
@@ -77,6 +80,9 @@ function FavoriteBtn(props) {
           } else {
             alert("Failed to remove from Favorite.");
           }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     } else {
       axios

@@ -1,7 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  userAuthReducer,
-  userDitailsReducer,
   userRegisterReducer,
   userSigninReducer,
 } from "./reducers/userReducers";
@@ -20,8 +18,6 @@ const store = configureStore({
   reducer: {
     userRegister: userRegisterReducer,
     userSignin: userSigninReducer,
-    userDetails: userDitailsReducer,
-    userAuth: userAuthReducer,
   },
   preloadedState: initialState,
 });
