@@ -5,10 +5,15 @@ import { useParams } from "react-router-dom";
 import MainImage from "../components/MainImage";
 import Card from "../components/Card";
 import FavoriteBtn from "../components/FavoriteBtn";
+import Comment from "../components/Comment";
+import { useSelector } from "react-redux";
 
 function MovieDetailPage(props) {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const [movie, setMovie] = useState();
   const [crews, setCrews] = useState([]);
+  const [commentLists, setCommentLists] = useState([]);
   const [actorToggle, setActorToggle] = useState(false);
   const { movieId } = useParams();
   console.log(movieId);
@@ -24,13 +29,19 @@ function MovieDetailPage(props) {
           .get(`${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`)
           .then((res) => {
             setCrews(res.data.cast);
-            console.log(res.data.cast);
+            // console.log(res.data.cast);
           });
       });
   }, [movieId]);
 
   const handleClick = () => {
     setActorToggle(!actorToggle);
+  };
+
+  const updateComments = (newComment) => {
+    setCommentLists(commentLists.concat(newComment));
+    console.log(commentLists);
+    console.log(newComment);
   };
 
   return (
@@ -47,7 +58,7 @@ function MovieDetailPage(props) {
           <div className="movie_info">
             <div className="favorite">
               <FavoriteBtn
-                userFrom={JSON.parse(localStorage.getItem("user"))._id}
+                userFrom={userInfo?._id}
                 movieId={movieId}
                 movieInfo={movie}
               />
@@ -103,6 +114,12 @@ function MovieDetailPage(props) {
               </div>
             )}
           </div>
+          <Comment
+            movieTitle={movie.original_title}
+            postId={movie.id}
+            commentLists={commentLists}
+            refreshComment={updateComments}
+          />
         </>
       )}
     </div>

@@ -15,49 +15,51 @@ function Header() {
   return (
     <div className="header">
       <Link to="/">
-        <div className="row  row-1">
+        <div className="row  row-1 logo">
           <div className="icon">
-            <i className="fa fa-film "></i>
+            <i className="fa fa-film"></i>
           </div>
           <div className="name">
             <h4>Movie DB</h4>
           </div>
         </div>
       </Link>
+      <div className="header_right">
+        <Link to={!userInfo ? "/login" : "/favorite"}>
+          <div className="row  row-1">
+            <div className="icon">
+              <i className="fa fa-heart"></i>
+            </div>
+            <div>
+              <span className="header_little">Favorite</span>
+            </div>
+          </div>
+        </Link>
 
-      <Link to="/favorite">
-        <div className="row  row-1">
-          <div className="icon">
-            <i className="fa fa-heart"></i>
-          </div>
-          <div>
-            <span>Favorite</span>
-          </div>
-        </div>
-      </Link>
-      {userInfo ? (
-        <Link to="/login" onClick={signoutHandler}>
-          <div className="row  row-1">
-            <div className="icon">
-              <i className="fa fa-user"></i>
+        {userInfo ? (
+          <Link to="/login" onClick={signoutHandler}>
+            <div className="row  row-1">
+              <div className="icon">
+                <i className="fa fa-user"></i>
+              </div>
+              <div>
+                <span className="header_little">Logout</span>
+              </div>
             </div>
-            <div>
-              <span>Logout</span>
+          </Link>
+        ) : (
+          <Link to={!userInfo && "/login"}>
+            <div className="row  row-1">
+              <div className="icon">
+                <i className="fa fa-user"></i>
+              </div>
+              <div>
+                <span className="header_little">Login</span>
+              </div>
             </div>
-          </div>
-        </Link>
-      ) : (
-        <Link to={!userInfo && "/login"}>
-          <div className="row  row-1">
-            <div className="icon">
-              <i className="fa fa-user"></i>
-            </div>
-            <div>
-              <span>Login</span>
-            </div>
-          </div>
-        </Link>
-      )}
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

@@ -22,45 +22,9 @@ function FavoriteBtn(props) {
   // console.log(favoriteNumber);
   // console.log(userInfo);
 
-  useEffect(() => {
-    axios
-      .post(`http://localhost:5000/api/favorite/favoriteNumber`, variables, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      })
-      .then((res) => {
-        if (res.data.success) {
-          // console.log(res.data);
-          setFavoriteNumber(res.data.favoriteNumber);
-        } else {
-          alert("Failed to get favoriteNumber.");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    axios
-      .post(`http://localhost:5000/api/favorite/favorited`, variables, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      })
-      .then((res) => {
-        if (res.data.success) {
-          // console.log(res.data);
-          setFavorited(res.data.favorited);
-        } else {
-          alert("Failed to get Favorite Info");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   const onClickFavorite = () => {
-    if (userInfo && !userInfo.isAuth) {
-      return alert("Please log in first!");
+    if (!userInfo) {
+      alert("Please log in first!");
     }
 
     if (favorited) {
@@ -103,6 +67,39 @@ function FavoriteBtn(props) {
         });
     }
   };
+
+  useEffect(() => {
+    axios
+      .post(`http://localhost:5000/api/favorite/favoriteNumber`, variables)
+      .then((res) => {
+        if (res.data.success) {
+          // console.log(res.data);
+          setFavoriteNumber(res.data.favoriteNumber);
+        } else {
+          alert("Failed to get favoriteNumber.");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .post(`http://localhost:5000/api/favorite/favorited`, variables, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${userInfo?.token}` },
+      })
+      .then((res) => {
+        if (res.data.success) {
+          // console.log(res.data);
+          setFavorited(res.data.favorited);
+        } else {
+          alert("Failed to get Favorite Info");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div>
