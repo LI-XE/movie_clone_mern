@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import MainImage from "../components/MainImage";
 import Card from "../components/Card";
 import FavoriteBtn from "../components/FavoriteBtn";
-import Comment from "../components/Comment";
+import Comment from "../components/Comments";
 import { useSelector } from "react-redux";
 
 function MovieDetailPage(props) {
@@ -17,6 +17,7 @@ function MovieDetailPage(props) {
   const [actorToggle, setActorToggle] = useState(false);
   const { movieId } = useParams();
   console.log(movieId);
+  console.log(commentLists);
 
   useEffect(() => {
     axios
@@ -31,6 +32,19 @@ function MovieDetailPage(props) {
             setCrews(res.data.cast);
             // console.log(res.data.cast);
           });
+      });
+
+    axios
+      .post("http://localhost:5000/api/comment/getComments", {
+        movieId: movieId,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          console.log(res.data);
+          setCommentLists(res.data.comments);
+        } else {
+          alert("Failed to get Comments");
+        }
       });
   }, [movieId]);
 
