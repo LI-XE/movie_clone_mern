@@ -29,11 +29,11 @@ router.post("/getComments", (req, res) => {
     });
 });
 
-router.delete("/deleteComment", authenticate, (req, res) => {
-  console.log(req.body._id);
-  Comment.findOneAndDelete({ _id: req.body._id }).exec((err, doc) => {
+router.delete("/deleteComment/:id", (req, res) => {
+  console.log(req.params.id);
+  Comment.findByIdAndDelete(req.params.id).exec((err, deletedComment) => {
     if (err) return res.status(400).json({ success: false, err });
-    res.status(200).json({ success: true, doc });
+    res.status(200).json({ success: true, deletedComment });
   });
 });
 
