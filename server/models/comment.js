@@ -14,8 +14,12 @@ const commentSchema = mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    tag: {
+      type: Object,
+    },
     content: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }
