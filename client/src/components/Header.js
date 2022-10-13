@@ -37,16 +37,28 @@ function Header() {
         </Link>
 
         {userInfo ? (
-          <Link to="/login" onClick={signoutHandler}>
-            <div className="row  row-1">
-              <div className="icon">
-                <i className="fa fa-user"></i>
+          <>
+            <Link to={!userInfo ? "/login" : `/profile/${userInfo._id}`}>
+              <div className="row  row-1">
+                <div className="icon">
+                  <i className="fa fa-user"></i>
+                </div>
+                <div>
+                  <span className="header_little">Profile</span>
+                </div>
               </div>
-              <div>
-                <span className="header_little">Logout</span>
+            </Link>
+            <Link to="/login" onClick={signoutHandler}>
+              <div className="row  row-1">
+                <div className="icon">
+                  <i className="fa fa-sign-out"></i>
+                </div>
+                <div>
+                  <span className="header_little">Logout</span>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </>
         ) : (
           <Link to={!userInfo && "/login"}>
             <div className="row  row-1">

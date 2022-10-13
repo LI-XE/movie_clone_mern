@@ -18,7 +18,7 @@ function LikeDislike({ comment, commentId, userInfo }) {
     axios
       .post("http://localhost:5000/api/like/getLikes", variable)
       .then((response) => {
-        console.log("getLikes", response.data);
+        // console.log("getLikes", response.data);
 
         if (response.data.success) {
           //How many likes does this video or comment have
@@ -38,7 +38,7 @@ function LikeDislike({ comment, commentId, userInfo }) {
     axios
       .post("http://localhost:5000/api/like/getDislikes", variable)
       .then((response) => {
-        console.log("getDislike", response.data);
+        // console.log("getDislike", response.data);
         if (response.data.success) {
           //How many likes does this video or comment have
           setDislikes(response.data.dislikes.length);
