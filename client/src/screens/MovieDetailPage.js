@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainImage from "../components/MainImage";
 import Card from "../components/Card";
 import FavoriteBtn from "../components/FavoriteBtn";
-import Comment from "../components/Comments";
+import Comments from "../components/Comments";
 import { useSelector } from "react-redux";
 
 function MovieDetailPage(props) {
@@ -16,14 +16,15 @@ function MovieDetailPage(props) {
   const [commentLists, setCommentLists] = useState([]);
   const [actorToggle, setActorToggle] = useState(false);
   const { movieId } = useParams();
-  console.log(movieId);
-  console.log(commentLists);
+  const navigate = useNavigate();
+  // console.log(movieId);
+  // console.log(commentLists);
 
   useEffect(() => {
     axios
       .get(`${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMovie(res.data);
 
         axios
@@ -40,7 +41,7 @@ function MovieDetailPage(props) {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data);
+          // console.log(res.data);
           setCommentLists(res.data.comments);
         } else {
           alert("Failed to get Comments");
@@ -54,8 +55,14 @@ function MovieDetailPage(props) {
 
   const updateComments = (newComment) => {
     setCommentLists(commentLists.concat(newComment));
+
+    navigate(`/movie/${movieId}`);
     console.log(commentLists);
-    console.log(newComment);
+  };
+
+  const afterDeleteComment = () => {
+    console.log(movieId);
+    navigate(`/movie/${movieId}`);
   };
 
   return (
@@ -66,7 +73,7 @@ function MovieDetailPage(props) {
             image={`${IMAGE_BASE_URL}w1280${
               movie.backdrop_path && movie.backdrop_path
             }`}
-            title={movie.original_title}
+            title={movie.title}
             text={movie.overview}
           />
           <div className="movie_info">
@@ -82,7 +89,7 @@ function MovieDetailPage(props) {
               <thead>
                 <tr>
                   <th>Title</th>
-                  <td colSpan="2">{movie.original_title}</td>
+                  <td colSpan="2">{movie.title}</td>
                   <th>Original Language</th>
                   <td colSpan="2">{movie.original_language}</td>
                 </tr>
@@ -128,11 +135,13 @@ function MovieDetailPage(props) {
               </div>
             )}
           </div>
-          <Comment
-            movieTitle={movie.original_title}
+          <Comments
+            movieTitle={movie.title}
             postId={movie.id}
             commentLists={commentLists}
             refreshComment={updateComments}
+            setCommentLists={setCommentLists}
+            afterDeleteComment={afterDeleteComment}
           />
         </>
       )}

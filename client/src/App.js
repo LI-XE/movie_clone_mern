@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import HomePage from "./screens/HomePage";
 import MovieDetailPage from "./screens/MovieDetailPage";
 import MyFavoritedMovies from "./screens/MyFavoritedMovies";
+import Profile from "./screens/Profile";
 import LoginPage from "./views/LoginPage";
 import RegisterPage from "./views/RegisterPage";
 
@@ -25,6 +26,7 @@ function App() {
               element={<MyFavoritedMovies />}
               exact
             ></Route>
+            <Route path="/profile/:id" element={<Profile />} exact></Route>
             <Route path="/register" element={<RegisterPage />} exact></Route>
             <Route path="/login" element={<LoginPage />} exact></Route>
           </Routes>

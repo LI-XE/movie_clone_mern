@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
+const multer = require("multer");
+const path = require("path");
 
 const mongoose = require("mongoose");
 const connect = mongoose
@@ -21,6 +23,35 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
+//  middleware
+// app.use(express.json());
+// app.use(helmet());
+// app.use(morgan("common"));
+
+// upload images
+// const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+
+const upload = multer({ storage });
+// console.log(upload);
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    console.log(req);
+    return res.status(200).json("File uploaded successfully!");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/favorite", require("./routes/favorite"));

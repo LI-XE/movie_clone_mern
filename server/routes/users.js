@@ -60,10 +60,14 @@ router.post("/login", (req, res) => {
               const token = jwt.sign(user._id.toHexString(), "secret");
               // res.cookie("usertokenExp", user.tokenExp);
               res
-                .cookie("usertoken", jwt.sign(user._id.toHexString(), "secret"), {
-                  httpOnly: true,
-                  expires: new Date(Date.now() + 900000000),
-                })
+                .cookie(
+                  "usertoken",
+                  jwt.sign(user._id.toHexString(), "secret"),
+                  {
+                    httpOnly: true,
+                    expires: new Date(Date.now() + 86400),
+                  }
+                )
                 .status(200)
                 .json({
                   message: "Successfully logged in",
@@ -90,6 +94,52 @@ router.post("/login", (req, res) => {
       console.log(err);
       res.status(400).json({ message: "Invalid Login Attempt - 4" });
     });
+});
+
+// update profile
+router.put("/:id", authenticate, async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      $set: req.body,
+    });
+    res.status(200).json("Account has been updated");
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+// router.put("/:id", async (req, res) => {
+//   if (req.body.userId === req.params.id || req.user.isAdmin) {
+//     if (req.body.password) {
+//       try {
+//         const salt = await bcrypt.genSalt(10);
+//         req.body.password = await bcrypt.hash(req.body.password, salt);
+//       } catch (err) {
+//         return res.status(500).json(err);
+//       }
+//     }
+//     try {
+//       const user = await User.findByIdAndUpdate(req.params.id, {
+//         $set: req.body,
+//       });
+//       res.status(200).json("Account has been updated");
+//     } catch (err) {
+//       return res.status(500).json(err);
+//     }
+//   } else {
+//     return res.status(403).json("You can update only your account!");
+//   }
+// });
+
+//  get a user
+router.get("/:id", async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.findById(userId);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.get("/logout", authenticate, (req, res) => {

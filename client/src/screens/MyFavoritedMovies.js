@@ -11,25 +11,6 @@ function MyFavoritedMovies(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
-  const getFavoritedMovies = (variables) => {
-    axios
-      .post(`http://localhost:5000/api/favorite/getFavoritedMovie`, variables, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      })
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data);
-          setFavoritedMovies(res.data.favorites);
-        } else {
-          alert("Failed to get favorited videos!");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const removeFromFavorite = (movieId, userFrom) => {
     axios
       .post(
@@ -42,7 +23,7 @@ function MyFavoritedMovies(props) {
       )
       .then((response) => {
         if (response.data.success) {
-          getFavoritedMovies();
+          favoritedMovies();
         } else {
           alert("Failed to Remove From Favorite");
         }
@@ -56,11 +37,34 @@ function MyFavoritedMovies(props) {
     if (!userInfo) {
       navigate("/login");
     }
+
+    const getFavoritedMovies = (variables) => {
+      axios
+        .post(
+          `http://localhost:5000/api/favorite/getFavoritedMovie`,
+          variables,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        )
+        .then((res) => {
+          if (res.data.success) {
+            // console.log(res.data);
+            setFavoritedMovies(res.data.favorites);
+          } else {
+            alert("Failed to get favorited videos!");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     const variables = {
       userFrom: userInfo._id,
     };
     getFavoritedMovies(variables);
-  }, [navigate, getFavoritedMovies, userInfo]);
+  }, [navigate, setFavoritedMovies, userInfo, favoritedMovies]);
 
   return (
     <div className="myFavorite">
@@ -113,7 +117,7 @@ function MyFavoritedMovies(props) {
                         removeFromFavorite(favorite.movieId, favorite.userFrom);
                       }}
                     >
-                      Delete from Favorite
+                      Remove
                     </button>
                   </td>
                 </tr>

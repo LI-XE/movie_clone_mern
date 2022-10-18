@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function FavoriteBtn(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [favoriteNumber, setFavoriteNumber] = useState(0);
   const [favorited, setFavorited] = useState(false);
+
+  const navigate = useNavigate();
 
   const variables = {
     userFrom: props.userFrom,
@@ -16,15 +19,11 @@ function FavoriteBtn(props) {
     movieRunTime: props.movieInfo.runtime,
   };
 
-  // console.log(variables);
-  // console.log(localStorage.getItem("user"));
-  // console.log(favorited);
-  // console.log(favoriteNumber);
-  // console.log(userInfo);
 
   const onClickFavorite = () => {
     if (!userInfo) {
-      alert("Please log in first!");
+      // alert("Please log in first!");
+      navigate("/login");
     }
 
     if (favorited) {
@@ -34,7 +33,7 @@ function FavoriteBtn(props) {
           variables,
           {
             withCredentials: true,
-            headers: { Authorization: `Bearer ${userInfo.token}` },
+            headers: { Authorization: `Bearer ${userInfo?.token}` },
           }
         )
         .then((res) => {
@@ -99,7 +98,7 @@ function FavoriteBtn(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [userInfo?.token, variables, favoriteNumber, favorited]);
 
   return (
     <div>
