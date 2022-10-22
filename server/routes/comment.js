@@ -40,9 +40,6 @@ router.post("/getComments", (req, res) => {
 
 // Delete comment
 router.delete("/deleteComment/:id", authenticate, (req, res) => {
-  console.log(req.params.id);
-  console.log(req.user);
-
   Comment.findByIdAndDelete(req.params.id).exec((err, toDelComment) => {
     if (err) return res.status(403).json({ success: false, err });
     if (toDelComment) {
@@ -55,7 +52,7 @@ router.delete("/deleteComment/:id", authenticate, (req, res) => {
         toDelComment.commentResponses.map((comment) => {
           Comment.findByIdAndDelete(comment).exec((err, comment) => {
             if (err) return res.status(403).json({ success: false, err });
-            console.log(`comment: ${comment}`);
+            // console.log(`comment: ${comment}`);
           });
         });
       }

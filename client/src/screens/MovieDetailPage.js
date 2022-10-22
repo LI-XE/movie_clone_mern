@@ -47,7 +47,7 @@ function MovieDetailPage(props) {
           alert("Failed to get Comments");
         }
       });
-  }, [movieId]);
+  }, [movieId, commentLists]);
 
   const handleClick = () => {
     setActorToggle(!actorToggle);
@@ -57,11 +57,11 @@ function MovieDetailPage(props) {
     setCommentLists(commentLists.concat(newComment));
 
     navigate(`/movie/${movieId}`);
-    console.log(commentLists);
+    // console.log(commentLists);
   };
 
   const afterDeleteComment = () => {
-    console.log(movieId);
+    // console.log(movieId);
     navigate(`/movie/${movieId}`);
   };
 

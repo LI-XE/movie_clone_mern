@@ -32,10 +32,6 @@ function Comments({
     if (!userInfo) {
       alert("Please Log in first");
     }
-    console.log(userInfo);
-
-    console.log(variables);
-    console.log(commentLists);
 
     axios
       .post("http://localhost:5000/api/comment/saveComment", variables, {
@@ -44,7 +40,6 @@ function Comments({
       })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data);
           setComment("");
           refreshComment(res.data.result);
         } else {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LikeDislike from "./LikeDislike";
 import { REACT_APP_PUBLIC_FOLDER } from "../Config";
 
@@ -9,7 +9,6 @@ function SingleComment({
   comment,
   postId,
   refreshComment,
-  commentLists,
   commentId,
   parentCommentId,
   afterDeleteComment,
@@ -20,8 +19,6 @@ function SingleComment({
   const [commentValue, setCommentValue] = useState("");
   const [OpenReply, setOpenReply] = useState(false);
   const PF = REACT_APP_PUBLIC_FOLDER;
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCommentValue(e.currentTarget.value);
@@ -83,8 +80,8 @@ function SingleComment({
     })
       .then((res) => {
         if (res.data.success) {
-          console.log(comment);
-          afterDeleteComment(commentId);
+          // console.log(res.data.toDelComment);
+          afterDeleteComment();
         } else {
           alert("Failed to Delete Comment.");
         }

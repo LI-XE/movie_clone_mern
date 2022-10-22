@@ -15,6 +15,11 @@ body {
   
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 .row {
   display: flex;
   justify-content: center;
@@ -35,6 +40,84 @@ button {
   font-size: 1rem;
   font-weight: bold;
   border-radius: 0.5em;
+}
+
+/***************** Header *****************/
+.header {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  max-width: 100%;
+  height: 8vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(#36393d, #03272f, #2d3033);
+  font-weight: bold;
+}
+
+.header_right .menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.header_right .hamburger{
+  display: none;
+}
+
+.row-1 {
+  margin: 0.7em 1em;
+}
+
+.row-1:hover {
+  color: tomato;
+}
+
+.logo {
+  color: tomato;
+}
+
+.logo:hover {
+  color: rgb(250, 61, 27);
+}
+
+.icon {
+  max-width: 5rem;
+  font-size: 1.3rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+  margin-right: 0.5em;
+}
+
+.header_little {
+  font-size: 1.3rem;
+}
+
+.userControl {
+  width: 10rem;
+  height: auto;
+  background-color: white;
+  position:absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3em 1em;
+  box-shadow: rgba(173, 173, 207, 0.358) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  cursor: pointer;
+}
+
+.userControl i {
+  margin-left: 1em;
 }
 
 
@@ -139,6 +222,7 @@ table {
   border: 0.2rem solid rgb(187, 186, 186);
   border-collapse: collapse;
   margin: 1em auto;
+  /* word-wrap: break-word; */
 }
 
 th, td {
@@ -169,8 +253,19 @@ th {
   color: white;
 }
 
+/***************** Signin Register Page *****************/
+
 .signin_container {
-  max-width: 30rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em auto;
+}
+
+.reglog_form {
+  width: 25rem;
+  max-width: 90%;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -178,33 +273,500 @@ th {
   border-radius: 0.5rem;
   border: 0.1rem solid lightgray;
   padding: 1em;
-}
-
-.signin_container .form {
-  max-width: 60rem;
   margin: 0;
 }
 
 .signin_container h1 {
   font-weight: 500;
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 0.5em;
 }
 
 .signin_container div {
+  font-size: 1.2rem;
+  max-width: 80%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
 }
 
 .signin_container  label {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+.signin_container input {
   font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5em;
+  border: 0.1em solid rgb(168, 166, 166);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
 }
 
 .signin_container  p {
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 700;
   margin-top: 1em;
+}
+
+.signin_container a {
+  color: rgb(255, 128, 105);
+}
+
+.signin_container button {
+  background-color: rgb(243, 240, 240);
+}
+
+.signin_container button:hover {
+  background-color: rgb(255, 128, 105, 0.7);
+}
+
+/***************** My Favorited Movies Page *****************/
+
+
+.myFavorite {
+  padding: 1em;
+}
+
+.myFavorite span {
+  color: tomato;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.myFavorite h2 {
+  margin-bottom: 0.5em; 
+  border-bottom: 0.3rem solid rgb(187, 186, 186);
+}
+
+.myFavorite favorited_table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0.2rem solid rgb(187, 186, 186);
+}
+
+
+
+.myFavorite td, th {
+  border: 0.1rem solid #dddddd;
+  text-align: center;
+  padding: 1em;
+}
+
+.myFavorite tr:nth-child(even) {
+  background-color: rgb(241, 239, 239);
+}
+
+
+/***************** Comments  *****************/
+
+.comments-section {
+  width: 90%;
+  margin: 1em auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-section span {
+  font-weight: 300;
+  color: tomato;
+}
+
+.comments-section h2 {
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em; 
+  border-bottom: 0.3rem solid rgb(187, 186, 186);
+}
+
+.comments-section form {
+  display: flex;
+}
+
+.comments-section textarea {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 0.5em;
+  padding: 1em 0.5em 0em 0.5em;
+  font-size: 1rem;
+}
+
+.comments-section button {
+  background-color: white;
+  border: gray solid 0.1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.comments-section button:hover {
+  background-color: lightgray;
+  border: gray solid 0.08em;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment {
+  display: flex;
+  padding-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+
+.comment-left {
+  width: 10%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.2em 0.5em 0 0.5em;
+  /* background-color: #03272f; */
+  margin: 0;
+}
+
+.comment-left img {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1.5em;
+}
+
+.comment-right {
+  width: 100%;
+  margin-left: 0.5em;
+}
+
+.comment-right span {
+  color: rgb(45, 123, 232);
+  margin-right: 0.5em;
+}
+
+.comment-right, .comment-right a{
+  font-size: 1rem;
+  color: black;
+}
+
+.comment-right .content {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  /* word-break: break-all; */
+  word-wrap: break-word;
+}
+
+.comment-right .content a {
+  color: blue;
+}
+
+
+.commentsReply {
+  max-width: 100%;
+  margin-left: 10%;
+  margin-top: 0.5em;
+}
+
+.commentsReply .viewNumber {
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 0;
+  margin-bottom: 1em;
+  color: rgb(45, 123, 232);
+  cursor: pointer;
+}
+
+.fa-sort-up {
+  font-size: 1.5em;
+  margin-right: 1em;
+  /* padding-top: 0.5em; */
+}
+
+.fa-sort-down {
+  align-items: flex-start;
+  font-size: 1.5em;
+  margin-right: 1em;
+  padding: auto;
+}
+
+/***************** Like & Dislikes  *****************/
+.likes {
+  display: flex;
+}
+.likes .fa{
+  font-size: 1em;
+  margin-right: 0.5em;
+  cursor: pointer;
+}
+
+.likes p {
+  margin-right: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+/***************** Profile Page  *****************/
+.profile  {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  padding: 1em;
+}
+
+.profile span {
+  font-size: 3rem;
+  color: tomato;
+  margin-right: 0.2em;
+}
+
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 0;
+}
+
+.profile_info {
+  width: 100%;
+  /* flex: 1; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: lightgray solid 0.2em;
+}
+
+.profile_info img {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: rgb(233, 231, 231) solid 0.2em;
+  box-shadow: 0px -2px 19px 7px rgba(143,129,129,0.12);
+-webkit-box-shadow: 0px -2px 19px 7px rgba(143,129,129,0.12);
+-moz-box-shadow: 0px -2px 19px 7px rgba(143,129,129,0.12);
+}
+
+.profile_info span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3033;
+  margin-right: 0.5em;
+}
+
+.profile_info h2 {
+  margin: 0.5em auto;
+}
+
+.profile_edit {
+  min-width: 50%;
+  max-width: 100%;
+  /* flex: 2; */
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_edit .bg-green {
+  font-size: 1.5rem;
+  background-color: green;
+  color: white;
+  margin: 1em;
+}
+
+.profile_edit button:hover {
+  color: yellow;
+}
+.profile_edit .bg-red {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0.5em;
+  background-color: tomato;
+}
+
+.editForm {
+  width: 90%;
+  padding: 1em auto;
+}
+
+.profile_edit .options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5em auto;
+  /* padding: 0 1em; */
+}
+
+.profile_edit label {
+  font-weight: 700;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+
+.profile_edit input {
+  min-width: 50%;
+  max-width: 90%;
+  font-size: 1em;
+  padding: 0.2em;
+}
+
+.updateButton {
+  background-color: green;
+}
+
+.updateButton:hover {
+  color: white !important;
+}
+
+@media only screen and (max-width:960px){
+  .header .hamburger{
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    border: 3px solid white;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    cursor: pointer;
+    transform: scale(.6);
+    margin-right: 20px;
+}
+
+.header .hamburger i {
+  color: white;
+}
+
+/* .header .hamburger:after {
+     position: absolute;
+     content: '';
+     height: 100%;
+     width: 100%;
+     border-radius: 50%;
+     border: 4px solid white;
+     animation: hamburger_puls 1s ease infinite;
+}
+
+.header .hamburger .bar {
+    height: 2px;
+    width: 30px;
+    position: relative;
+    background-color: white;
+    z-index: -1;
+}
+
+.header .hamburger .bar::after,
+.header .hamburger .bar::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    background-color: white;
+    transition: .3s ease;
+    transition-property: top, bottom;
+}
+
+.header .hamburger .bar::after {
+    top: 8px;
+}
+
+.header .hamburger .bar::before {
+    bottom: 8px;
+}
+
+.header .hamburger .active .bar::before{
+    bottom: 0;
+}
+
+.header .hamburger .active .bar::after {
+    top: 0;
+} */
+
+.header .header_right .menu {
+  display: none;
+  /* left: 0%;
+  height: 0%; */
+}
+
+.header .hamburger-menu{
+  list-style: none;
+  position: absolute;
+  background-color: #222628;
+  width: 100%;
+  height: 30vh;
+  left: 0%;
+  top: 8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 10; */
+  overflow-x: hidden;
+  transition: .8s ease all !important;
+}
+
+.header_right .menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+/***************** FavoritedMovies Page  *****************/
+
+.myFavorite {
+  padding: 1em;
+}
+
+.myFavorite span {
+  color: tomato;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.myFavorite h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5em; 
+  border-bottom: 0.3rem solid rgb(187, 186, 186);
+}
+
+.myFavorite favorited_table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0.2rem solid rgb(187, 186, 186);
+}
+
+.favorited_table img {
+  max-width: 70px;
+  height: auto;
+}
+
+.favorited_table tr th {
+  font-size: 0.8rem;
+}
+
+.myFavorite td, th {
+  border: 0.1rem solid #dddddd;
+  text-align: center;
+  padding: 0.6em;
+  font-size: 0.8rem;
+}
+
+.myFavorite tr:nth-child(even) {
+  background-color: rgb(241, 239, 239);
+}
+
+.myFavorite button {
+  font-size: 0.8rem;
+  padding: 0.3em 0.8em;
+  font-weight: bold;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
 }

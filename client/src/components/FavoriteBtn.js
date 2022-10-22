@@ -19,10 +19,8 @@ function FavoriteBtn(props) {
     movieRunTime: props.movieInfo.runtime,
   };
 
-
   const onClickFavorite = () => {
     if (!userInfo) {
-      // alert("Please log in first!");
       navigate("/login");
     }
 
